@@ -85,6 +85,12 @@ octatonic.notes()
 
 Scale.Minor.harmonic.notes(withRoot: .c)
 
+//Collections
+Scale.blues
+Scale.Minor.melodic.notes(withRoot: .c)
+Chord.Triad.major.inversion(.first)?.notes(withRoot: .c)
+Chord.Triad.minor.notes(withRoot: .a)
+
 
 
 
