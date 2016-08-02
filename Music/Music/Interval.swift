@@ -257,7 +257,7 @@ extension Interval: CustomStringConvertible {
 extension Array where Element: IntervalProtocol {
     public func mode(_ degree: Degree) -> Array<Element>? {
         if self.count < 5 || self.count - 1 < degree.rawValue { return nil }
-        if let mode = self.rotate(degree.rawValue) {
+        if let mode = self.rotated(degree.rawValue) {
             var transposed = Array<Element>()
             for element in mode{
                 if let element = element.transposed(down: self[degree.rawValue]) {
@@ -269,7 +269,7 @@ extension Array where Element: IntervalProtocol {
     }
     public func inversion(_ inversion: Inversion) -> Array<Element>? {
         if self.count > 4 || self.count - 1 < inversion.rawValue { return nil }
-        return self.rotate(inversion.rawValue)
+        return self.rotated(inversion.rawValue)
     }
     public func transposed(up interval: Element) -> Array<Element>? {
         var transposed = Array<Element>()

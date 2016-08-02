@@ -189,13 +189,5 @@ extension Array where Element: NoteProtocol {
         }
         return transposed
     }
-//    public func transpose(_ pitch: Pitch)->[Note]{
-//        var transposed: [Note] = []
-//        for element in self {
-//            let note = Note((element as! Note).rawValue).transpose(pitch.value))
-//            transposed.append(note)
-//        }
-//        return transposed
-//    }
 }
 

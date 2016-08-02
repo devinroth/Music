@@ -55,7 +55,7 @@ var pitchCollection = [0,1,3,5]
 
 //note
 var melody = [Note.c,.a,.f,.g]
-melody.rotate(1)
+melody.rotated(1)
 //melody.transpose(1)
 melody.transposed(up: .major3)
 melody.transposed(down: .major3)
@@ -63,7 +63,7 @@ melody.transposed(down: .major3)
 //interval
 var majorScale = Scale.major
 majorScale.mode(.II)
-majorScale.rotate(1)
+majorScale.rotated(1)
 majorScale.notes(withRoot: .aFlat)
 
 
@@ -78,9 +78,9 @@ majorTriad1stInversion?.notes(withRoot: .c)
 //pitch
 var octatonic = Scale.Octatonic.halfStep
 octatonic.transposed(1)
-octatonic.invert()
-octatonic.retrograde()
-octatonic.rotate(1)
+octatonic.inverted()
+octatonic.retrograded()
+octatonic.rotated(1)
 octatonic.notes()
 
 Scale.Minor.harmonic.notes(withRoot: .c)

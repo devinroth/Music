@@ -9,7 +9,7 @@
 import Foundation
 
 extension Array {
-    public func rotate(_ index: Int) -> Array<Element>? {
+    public func rotated(_ index: Int) -> Array<Element>? {
         if index > self.count { return nil }
         var array = self[index..<self.count]
         array += self[0..<index]

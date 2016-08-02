@@ -64,14 +64,14 @@ extension Array where Element: PitchProtocol {
         }
         return transposed
     }
-    public func invert()->[Pitch]{
+    public func inverted()->[Pitch]{
         var inverted: [Pitch] = []
         for element in self {
             inverted.append(Pitch((element as! Pitch).invert()))
         }
         return inverted
     }
-    public func retrograde()->[Element]{
+    public func retrograded()->[Element]{
         return self.reversed()
     }
     public func notes()->[Note]{
