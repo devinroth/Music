@@ -45,7 +45,7 @@ var pitch: Pitch = 3
 Pitch(.dDoubleFlat)
 
 //methods
-pitch.transpose(1)
+pitch.transposed(1)
 pitch.invert()
 
 //COLLECTIONS

@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol PitchProtocol {
-    func transpose(_ pitch: Int) ->Int
+    func transposed(_ pitch: Int) ->Int
 }
 
 public struct Pitch {
@@ -36,7 +36,7 @@ extension Pitch: PitchProtocol {
         self.value = (note.rawValue + 9) * 7 % 12
     }
     
-    public func transpose(_ pitch: Int) ->Int {
+    public func transposed(_ pitch: Int) ->Int {
         var pitch = (self.value + pitch) % 12
         if pitch < 0 {
             pitch += 12
@@ -60,7 +60,7 @@ extension Array where Element: PitchProtocol {
     public func transposed(_ pitch: Pitch)->[Pitch]{
         var transposed: [Pitch] = []
         for element in self {
-            transposed.append(Pitch((element as! Pitch).transpose(pitch.value)))
+            transposed.append(Pitch((element as! Pitch).transposed(pitch.value)))
         }
         return transposed
     }
