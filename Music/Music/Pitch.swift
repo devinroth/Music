@@ -57,7 +57,7 @@ extension Pitch: CustomStringConvertible {
 }
 
 extension Array where Element: PitchProtocol {
-    public func transpose(_ pitch: Pitch)->[Pitch]{
+    public func transposed(_ pitch: Pitch)->[Pitch]{
         var transposed: [Pitch] = []
         for element in self {
             transposed.append(Pitch((element as! Pitch).transpose(pitch.value)))

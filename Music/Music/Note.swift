@@ -171,7 +171,7 @@ extension Note: CustomStringConvertible {
 }
 
 extension Array where Element: NoteProtocol {
-    public func transpose(up interval: Interval)->[Note]?{
+    public func transposed(up interval: Interval)->[Note]?{
         var transposed: [Note] = []
         for element in self {
             if let note = Note(interval, above: element as! Note) {
@@ -180,7 +180,7 @@ extension Array where Element: NoteProtocol {
         }
         return transposed
     }
-    public func transpose(down interval: Interval)->[Note]?{
+    public func transposed(down interval: Interval)->[Note]?{
         var transposed: [Note] = []
         for element in self {
             if let note = Note(interval, below: element as! Note) {

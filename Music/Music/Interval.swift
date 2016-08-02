@@ -10,8 +10,8 @@ import Foundation
 
 //Mark: Interval
 public protocol IntervalProtocol {
-    func transpose(up: Self)->Self?
-    func transpose(down: Self)->Self?
+    func transposed(up: Self)->Self?
+    func transposed(down: Self)->Self?
 }
 
 
@@ -237,10 +237,10 @@ extension Interval {
 }
 
 extension Interval: IntervalProtocol {
-    public func transpose(up interval: Interval)->Interval?{
+    public func transposed(up interval: Interval)->Interval?{
         return Interval(between: interval.inversion(), and: self)
     }
-    public func transpose(down interval: Interval)->Interval?{
+    public func transposed(down interval: Interval)->Interval?{
         return Interval(between: interval, and: self)
     }
 }
@@ -260,7 +260,7 @@ extension Array where Element: IntervalProtocol {
         if let mode = self.rotate(degree.rawValue) {
             var transposed = Array<Element>()
             for element in mode{
-                if let element = element.transpose(down: self[degree.rawValue]) {
+                if let element = element.transposed(down: self[degree.rawValue]) {
                     transposed.append(element)
                 } else { return nil }
             }
@@ -271,19 +271,19 @@ extension Array where Element: IntervalProtocol {
         if self.count > 4 || self.count - 1 < inversion.rawValue { return nil }
         return self.rotate(inversion.rawValue)
     }
-    public func transpose(up interval: Element) -> Array<Element>? {
+    public func transposed(up interval: Element) -> Array<Element>? {
         var transposed = Array<Element>()
         for element in self {
-            if let element = element.transpose(up: interval) {
+            if let element = element.transposed(up: interval) {
                 transposed.append(element)
             } else { return nil }
         }
         return transposed
     }
-    public func transpose(down interval: Element) -> Array<Element>? {
+    public func transposed(down interval: Element) -> Array<Element>? {
         var transposed = Array<Element>()
         for element in self {
-            if let element = element.transpose(down: interval) {
+            if let element = element.transposed(down: interval) {
                 transposed.append(element)
             } else { return nil }
         }
