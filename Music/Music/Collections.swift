@@ -10,6 +10,7 @@ import Foundation
 
 //Collections
 
+//Standard Scales
 public struct Scale {
     public static let major           : [Interval]     = [.perfect1,.major2,.major3,.perfect4,.perfect5,.major6,.major7]
     public static let blues           : [Interval]     = [.perfect1,.minor3,.perfect4,.augmented4,.perfect5,.minor7]
@@ -31,18 +32,7 @@ public struct Scale {
     }
 }
 
-public struct Mode {
-    public struct Major {
-        public static let ionian      : [Interval]     = Scale.major.mode(.I)!
-        public static let dorian      : [Interval]     = Scale.major.mode(.II)!
-        public static let phrygian    : [Interval]     = Scale.major.mode(.III)!
-        public static let lydian      : [Interval]     = Scale.major.mode(.IV)!
-        public static let mixolydian  : [Interval]     = Scale.major.mode(.V)!
-        public static let aeolian     : [Interval]     = Scale.major.mode(.VI)!
-        public static let locrian     : [Interval]     = Scale.major.mode(.VII)!
-    }
-}
-
+//scale degree names
 public enum Degree: Int {
     case I
     case II
@@ -58,6 +48,21 @@ public enum Degree: Int {
     case XII
 }
 
+//Standard Modes
+public struct Mode {
+    public struct Major {
+        public static let ionian      : [Interval]     = Scale.major.mode(.I)!
+        public static let dorian      : [Interval]     = Scale.major.mode(.II)!
+        public static let phrygian    : [Interval]     = Scale.major.mode(.III)!
+        public static let lydian      : [Interval]     = Scale.major.mode(.IV)!
+        public static let mixolydian  : [Interval]     = Scale.major.mode(.V)!
+        public static let aeolian     : [Interval]     = Scale.major.mode(.VI)!
+        public static let locrian     : [Interval]     = Scale.major.mode(.VII)!
+    }
+}
+
+
+//chord inversions names
 public enum Inversion: Int {
     case root
     case first
@@ -65,13 +70,16 @@ public enum Inversion: Int {
     case third
 }
 
+//standard chords
 public struct Chord {
+    //standard triads
     public struct Triad {
         public static let augmented   : [Interval]    = [.perfect1,.major3,.augmented5]
         public static let major       : [Interval]    = [.perfect1,.major3,.perfect5]
         public static let minor       : [Interval]    = [.perfect1,.minor3,.perfect5]
         public static let diminished  : [Interval]    = [.perfect1,.minor3,.diminished5]
     }
+    //standard seventh chords
     public struct Seventh {
         public static let augmentedMajor          : [Interval]    = [.perfect1,.major3,.augmented5,.major7]
         public static let majorMajor              : [Interval]    = [.perfect1,.major3,.perfect5,.major7]
@@ -82,4 +90,14 @@ public struct Chord {
         public static let diminishedMinor         : [Interval]    = [.perfect1,.minor3,.diminished5,.minor7]
         public static let diminishedDiminished    : [Interval]    = [.perfect1,.minor3,.diminished5,.diminished7]
     }
+    //common names
+    var aug     = Chord.Triad.augmented
+    var maj     = Chord.Triad.major
+    var min     = Chord.Triad.minor
+    var dim     = Chord.Triad.diminished
+    var maj7    = Chord.Seventh.majorMajor
+    var v7      = Chord.Seventh.majorMinor
+    var min7    = Chord.Seventh.minorMinor
+    var min7b5  = Chord.Seventh.diminishedMinor
+    var dim7    = Chord.Seventh.diminishedDiminished
 }
