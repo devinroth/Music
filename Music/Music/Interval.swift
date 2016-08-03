@@ -8,136 +8,111 @@
 
 import Foundation
 
-//Mark: Interval
-public protocol IntervalProtocol {
-    func transposed(up: Self)->Self?
-    func transposed(down: Self)->Self?
-}
-
-
+//enums
 public enum Interval: Int {
-    case quintuplyDiminished5 = -34
-    case quadruplyDiminished2
-    case quadruplyDiminished6
-    case quadruplyDiminished3
-    case quadruplyDiminished7
-    case quadruplyDiminished4
-    case quadruplyDiminished1
-    case quadruplyDiminished5
-    case triplyDiminished2
-    case triplyDiminished6
-    case triplyDiminished3
-    case triplyDiminished7
-    case triplyDiminished4
-    case triplyDiminished1
-    case triplyDiminished5
-    case doublyDiminished2
-    case doublyDiminished6
-    case doublyDiminished3
-    case doublyDiminished7
-    case doublyDiminished4
-    case doublyDiminished1
-    case doublyDiminished5
-    case diminished2
-    case diminished6
-    case diminished3
-    case diminished7
-    case diminished4
-    case diminished1
-    case diminished5
-    case minor2
-    case minor6
-    case minor3
-    case minor7
-    case perfect4
-    case perfect1 = 0
-    case perfect5
-    case major2
-    case major6
-    case major3
-    case major7
-    case augmented4
-    case augmented1
-    case augmented5
-    case augmented2
-    case augmented6
-    case augmented3
-    case augmented7
-    case doublyAugmented4
-    case doublyAugmented1
-    case doublyAugmented5
-    case doublyAugmented2
-    case doublyAugmented6
-    case doublyAugmented3
-    case doublyAugmented7
-    case triplyAugmented4
-    case triplyAugmented1
-    case triplyAugmented5
-    case triplyAugmented2
-    case triplyAugmented6
-    case triplyAugmented3
-    case triplyAugmented7
-    case quadruplyAugmented4
-    case quadruplyAugmented1
-    case quadruplyAugmented5
-    case quadruplyAugmented2
-    case quadruplyAugmented6
-    case quadruplyAugmented3
-    case quadruplyAugmented7
-    case quintuplyAugmented4 = 34
+    case vDim5      = -34
+    case ivDim2
+    case ivDim6
+    case ivDim3
+    case ivDim7
+    case ivDim4
+    case ivDim1
+    case ivDim5
+    case iiiDim2
+    case iiiDim6
+    case iiiDim3
+    case iiiDim7
+    case iiiDim4
+    case iiiDim1
+    case iiiDim5
+    case iiDim2
+    case iiDim6
+    case iiDim3
+    case iiDim7
+    case iiDim4
+    case iiDim1
+    case iiDim5
+    case dim2
+    case dim6
+    case dim3
+    case dim7
+    case dim4
+    case dim1
+    case dim5
+    case min2
+    case min6
+    case min3
+    case min7
+    case per4
+    case per1       = 0
+    case per5
+    case maj2
+    case maj6
+    case maj3
+    case maj7
+    case aug4
+    case aug1
+    case aug5
+    case aug2
+    case aug6
+    case aug3
+    case aug7
+    case iiAug4
+    case iiAug1
+    case iiAug5
+    case iiAug2
+    case iiAug6
+    case iiAug3
+    case iiAug7
+    case iiiAug4
+    case iiiAug1
+    case iiiAug5
+    case iiiAug2
+    case iiiAug6
+    case iiiAug3
+    case iiiAug7
+    case ivAug4
+    case ivAug1
+    case ivAug5
+    case ivAug2
+    case ivAug6
+    case ivAug3
+    case ivAug7
+    case vAug4      = 34
 }
 
 extension Interval {
     public enum Quality: Int {
-        case quintuplyDiminished    = -34
-        case quadruplyDiminished    = -33
-        case triplyDiminished       = -26
-        case doublyDiminished       = -19
-        case diminished             = -12
-        case minor                  = -5
-        case perfect                = 0
-        case major                  = 2
-        case augmented              = 6
-        case doublyAugmented        = 13
-        case triplyAugmented        = 20
-        case quadruplyAugmented     = 27
-        case quintuplyAugmented     = 34
+        case vDim    = -34
+        case ivDim   = -33
+        case iiiDim  = -26
+        case iiDim   = -19
+        case dim     = -12
+        case min     = -5
+        case per     = 0
+        case maj     = 2
+        case aug     = 6
+        case iiAug   = 13
+        case iiiAug  = 20
+        case ivAug   = 27
+        case vAug    = 34
     }
     
     public var quality: Quality {
         switch self.rawValue {
-        case -34         : return .quintuplyDiminished
-        case -33 ... -27 : return .quadruplyDiminished
-        case -26 ... -20 : return .triplyDiminished
-        case -19 ... -13 : return .doublyDiminished
-        case -12 ...  -6 : return .diminished
-        case -5  ...  -2 : return .minor
-        case -1  ...   1 : return .perfect
-        case  2  ...   5 : return .major
-        case  6  ...  12 : return .augmented
-        case 13  ...  19 : return .doublyAugmented
-        case 20  ...  26 : return .triplyAugmented
-        case 27  ...  33 : return .quadruplyAugmented
-        default          : return .quintuplyAugmented
-        }
-    }
-}
-extension Interval.Quality: CustomStringConvertible {
-    public var description: String {
-        switch self {
-        case quintuplyDiminished   : return "Quintuply Diminished"
-        case quadruplyDiminished   : return "Quadruply Diminished"
-        case triplyDiminished      : return "Triply Diminished"
-        case doublyDiminished      : return "Doubly Diminished"
-        case diminished            : return "Diminished"
-        case minor                 : return "Minor"
-        case perfect               : return "Perfect"
-        case major                 : return "Major"
-        case augmented             : return "Augmented"
-        case doublyAugmented       : return "Doubly Augmented"
-        case triplyAugmented       : return "Triply Augmented"
-        case quadruplyAugmented    : return "Quadruply Augmented"
-        case quintuplyAugmented    : return "Quintuply Augmented"
+        case -34         : return .vDim
+        case -33 ... -27 : return .ivDim
+        case -26 ... -20 : return .iiiDim
+        case -19 ... -13 : return .iiDim
+        case -12 ...  -6 : return .dim
+        case -5  ...  -2 : return .min
+        case -1  ...   1 : return .per
+        case  2  ...   5 : return .maj
+        case  6  ...  12 : return .aug
+        case 13  ...  19 : return .iiAug
+        case 20  ...  26 : return .iiiAug
+        case 27  ...  33 : return .ivAug
+        default          : return .vAug
         }
     }
 }
@@ -156,22 +131,8 @@ extension Interval {
         return Value(rawValue: (self.rawValue + 36) % 7)!
     }
 }
-extension Interval.Value: CustomStringConvertible {
-    public var description: String {
-        get {
-            switch self {
-            case .first  : return "1st"
-            case .second : return "2nd"
-            case .third  : return "3rd"
-            case .fourth : return "4th"
-            case .fifth  : return "5th"
-            case .sixth  : return "6th"
-            case .seventh: return "7th"
-            }
-        }
-    }
-}
 
+//initializers
 extension Interval {
     public init?(between bottom: Note, and top: Note){
         if let interval = Interval(rawValue: top.rawValue - bottom.rawValue) {
@@ -187,73 +148,68 @@ extension Interval {
             return nil
         }
     }
-    //maybe a way to simplify uses note values
     public init?(_ quality: Quality,_ value: Value){
         switch quality {
-        case .quintuplyDiminished:
+        case .vDim:
             switch value {
             case .fifth:
-                self = .quintuplyDiminished5
+                self = .vDim5
             default:
                 return nil
             }
-        case .minor:
+        case .min:
             switch value {
             case .second,.third,.sixth,.seventh:
                 self = Interval(rawValue: value.rawValue - 8)!
             default:
                 return nil
             }
-        case .perfect:
+        case .per:
             switch value {
             case .first,.fourth,.fifth:
                 self = Interval(rawValue: value.rawValue)!
             default:
                 return nil
             }
-        case .major :
+        case .maj:
             switch value {
             case .second,.third,.sixth,.seventh:
                 self = Interval(rawValue: value.rawValue - 1)!
             default:
                 return nil
             }
-        case .quintuplyAugmented:
+        case .vAug:
             switch value {
             case .fourth:
-                self = .quintuplyAugmented4
+                self = .vAug4
             default:
                 return nil
             }
-        case .diminished,.doublyDiminished,.triplyDiminished,.quadruplyDiminished:
+        case .dim,.iiDim,.iiiDim,.ivDim:
             self = Interval(rawValue: quality.rawValue + (value.rawValue + 4) % 7 )!
-        case .augmented,.doublyAugmented,.triplyAugmented,.quadruplyAugmented:
+        case .aug,.iiAug,.iiiAug,.ivAug:
             self = Interval(rawValue: quality.rawValue + value.rawValue)!
         }
     }
-    public func inversion()->Interval{
-        return Interval(rawValue: -self.rawValue)!
-    }
 }
-
+//Methods
+public protocol IntervalProtocol {
+    func transposed(up: Self)->Self?
+    func transposed(down: Self)->Self?
+}
 extension Interval: IntervalProtocol {
     public func transposed(up interval: Interval)->Interval?{
-        return Interval(between: interval.inversion(), and: self)
+        return Interval(between: interval.inverted(), and: self)
     }
     public func transposed(down interval: Interval)->Interval?{
         return Interval(between: interval, and: self)
     }
-}
-
-extension Interval: CustomStringConvertible {
-    
-    public var description: String {
-        get {
-            return self.quality.description + " " + self.value.description
-        }
+    public func inverted()->Interval{
+        return Interval(rawValue: -self.rawValue)!
     }
 }
 
+//Arrays
 extension Array where Element: IntervalProtocol {
     public func mode(_ degree: Degree) -> Array<Element>? {
         if self.count < 5 || self.count - 1 < degree.rawValue { return nil }
@@ -289,7 +245,7 @@ extension Array where Element: IntervalProtocol {
         }
         return transposed
     }
-    public func notes(withRoot note: Note) -> [Note]?{
+    public func notes(root note: Note) -> [Note]?{
         var notes: [Note] = []
         for interval in self {
             if let note = Note(interval as! Interval, above: note) {
@@ -299,4 +255,49 @@ extension Array where Element: IntervalProtocol {
         return notes
     }
     
+}
+
+//custon strings
+extension Interval.Quality: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case vDim       : return "Quintuply Diminished"
+        case ivDim      : return "Quadruply Diminished"
+        case iiiDim     : return "Triply Diminished"
+        case iiDim      : return "Doubly Diminished"
+        case dim        : return "Diminished"
+        case min        : return "Minor"
+        case per        : return "Perfect"
+        case maj        : return "Major"
+        case aug        : return "Augmented"
+        case iiAug      : return "Doubly Augmented"
+        case iiiAug     : return "Triply Augmented"
+        case ivAug      : return "Quadruply Augmented"
+        case vAug       : return "Quintuply Augmented"
+        }
+    }
+}
+extension Interval.Value: CustomStringConvertible {
+    public var description: String {
+        get {
+            switch self {
+            case .first  : return "1st"
+            case .second : return "2nd"
+            case .third  : return "3rd"
+            case .fourth : return "4th"
+            case .fifth  : return "5th"
+            case .sixth  : return "6th"
+            case .seventh: return "7th"
+            }
+        }
+    }
+}
+
+extension Interval: CustomStringConvertible {
+    
+    public var description: String {
+        get {
+            return self.quality.description + " " + self.value.description
+        }
+    }
 }

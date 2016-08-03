@@ -5,97 +5,90 @@ import Foundation
 import Music
 
 //NOTE
-var note = Note.fSharp
+var note = Note.Fs
+
 
 //properties
 note.name
 note.accidental
 
 //initalizers
-Note(.major2, above: .e)
-Note(.minor3, below: .a)
+Note(.maj2, above: .E)
+Note(.min3, below: .A)
 Note(4)
-Note(.c, .sharp)
+Note(.C, .b) // Seems pretty useless
 
 //methods
-note.transposed(up: .major2)
-note.transposed(down: .minor2)
+note.transposed(up: .maj2)
+note.transposed(down: .min2)
 
 //INTERVAL
-var interval = Interval.perfect5
+var interval = Interval.per5
 
 //properties
 interval.quality
 interval.value
 
 //initalizers
-Interval(between: .perfect4, and: .major3)
-Interval(between: .c, and: .g)
-Interval(.major, .sixth)
+Interval(between: .per4, and: .maj3)
+Interval(between: .C, and: .G)
+Interval(.maj, .sixth) // Also useless
 
 //methods
-interval.inversion()
-interval.transposed(up: .major3)
-interval.transposed(down: .minor3)
+interval.inverted()
+interval.transposed(up: .maj3)
+interval.transposed(down: .min3)
 
 //PITCH
 var pitch: Pitch = 3
 
 //initalizers
-Pitch(.dDoubleFlat)
+Pitch(.Dbb)
 
 //methods
 pitch.transposed(1)
-pitch.invert()
+pitch.inverted()
 
 //COLLECTIONS
-var cMajorScale = [Note.c,.d,.e,.f,.g,.a,.b]
-var intervalCollection = [Interval.perfect5,.major2,.minor2]
-var pitchCollection = [0,1,3,5]
+var cMajorScale         : [Note]        = [.C,.D,.E,.F,.G,.A,.B]
+var intervalCollection  : [Interval]    = [.per5,.maj2,.min2]
+var pitchCollection     : [Pitch]       = [0,1,3,5]
 
 //note
-var melody = [Note.c,.a,.f,.g]
+var melody = [Note.C,.A,.F,.G]
 melody.rotated(1)
-//melody.transpose(1)
-melody.transposed(up: .major3)
-melody.transposed(down: .major3)
+melody.transposed(up: .maj3)
+melody.transposed(down: .maj3)
 
 //interval
-var majorScale = Scale.major
+var majorScale = Scale.Major
 majorScale.mode(.II)
 majorScale.rotated(1)
-majorScale.notes(withRoot: .aFlat)
+majorScale.notes(root: .Ab)
 
 
-var majorTriad = Chord.Triad.major
+var majorTriad = Chord.Triad.Major
 var majorTriad1stInversion = majorTriad.inversion(.second)
 
-majorTriad.transposed(up: .minor2)
-majorTriad.transposed(up: .perfect5)
-majorTriad1stInversion?.notes(withRoot: .c)
+majorTriad.transposed(up: .min2)
+majorTriad.transposed(up: .per5)
+majorTriad1stInversion?.notes(root: .C)
 
 
 //pitch
-var octatonic = Scale.Octatonic.halfStep
+var octatonic = Scale.Octatonic.HalfStep
 octatonic.transposed(1)
 octatonic.inverted()
 octatonic.retrograded()
 octatonic.rotated(1)
 octatonic.notes()
 
-Scale.Minor.harmonic.notes(withRoot: .c)
+Scale.Minor.Harmonic.notes(root: .C)
 
 //Collections
-Scale.blues
-Scale.Minor.melodic.notes(withRoot: .c)
-Chord.Triad.major.inversion(.first)?.notes(withRoot: .c)
-Chord.Triad.minor.notes(withRoot: .a)
-
-
-
-
-
-
-
+Scale.Blues
+Scale.Minor.Melodic.notes(root: .C)
+Chord.Triad.Major.inversion(.first)?.notes(root: .C)
+Chord.Triad.Major.notes(root: .A)
 
 

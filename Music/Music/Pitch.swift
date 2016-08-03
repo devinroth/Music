@@ -10,6 +10,7 @@ import Foundation
 
 public protocol PitchProtocol {
     func transposed(_ pitch: Int) ->Int
+    func inverted() -> Int
 }
 
 public struct Pitch {
@@ -22,37 +23,20 @@ public struct Pitch {
     }
 }
 
-extension Pitch: IntegerLiteralConvertible {
-    public typealias Pitch = Int
-    
-    /// Create an instance initialized to `value`.
-    public init(integerLiteral value: Pitch.IntegerLiteralType) {
-        self.value = value
-    }
-}
-
 extension Pitch: PitchProtocol {
     public init(_ note: Note){
         self.value = (note.rawValue + 9) * 7 % 12
     }
     
-    public func transposed(_ pitch: Int) ->Int {
+    public func transposed(_ pitch: Int) ->Pitch {
         var pitch = (self.value + pitch) % 12
         if pitch < 0 {
             pitch += 12
         }
         return pitch
     }
-    public func invert() ->Pitch {
+    public func inverted() ->Pitch {
         return (12 - self.value)%12
-    }
-}
-
-extension Pitch: CustomStringConvertible {
-    public var description: String {
-        get {
-            return String(self.value)
-        }
     }
 }
 
@@ -67,7 +51,7 @@ extension Array where Element: PitchProtocol {
     public func inverted()->[Pitch]{
         var inverted: [Pitch] = []
         for element in self {
-            inverted.append(Pitch((element as! Pitch).invert()))
+            inverted.append(Pitch((element as! Pitch).inverted()))
         }
         return inverted
     }
@@ -80,5 +64,22 @@ extension Array where Element: PitchProtocol {
             notes.append(Note(element as! Pitch))
         }
         return notes
+    }
+}
+
+extension Pitch: IntegerLiteralConvertible {
+    public typealias Pitch = Int
+    
+    /// Create an instance initialized to `value`.
+    public init(integerLiteral value: Pitch.IntegerLiteralType) {
+        self.value = (value%12 + 12) % 12
+    }
+}
+
+extension Pitch: CustomStringConvertible {
+    public var description: String {
+        get {
+            return String(self.value)
+        }
     }
 }

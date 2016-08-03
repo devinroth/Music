@@ -11,53 +11,54 @@ import Foundation
 public protocol NoteProtocol {
 }
 
-//Mark: Note
+//Fundamental Notes
 public enum Note: Int, NoteProtocol {
-    case fDoubleFlat
-    case cDoubleFlat
-    case gDoubleFlat
-    case dDoubleFlat
-    case aDoubleFlat
-    case eDoubleFlat
-    case bDoubleFlat
-    case fFlat
-    case cFlat
-    case gFlat
-    case dFlat
-    case aFlat
-    case eFlat//fbb
-    case bFlat
-    case f
-    case c
-    case g
-    case d //reflextion point
-    case a
-    case e
-    case b
-    case fSharp
-    case cSharp
-    case gSharp
-    case dSharp//fbb
-    case aSharp
-    case eSharp
-    case bSharp
-    case fDoubleSharp
-    case cDoubleSharp
-    case gDoubleSharp
-    case dDoubleSharp
-    case aDoubleSharp
-    case eDoubleSharp
-    case bDoubleSharp
+    case Fbb        //Double Flats
+    case Cbb
+    case Gbb
+    case Dbb
+    case Abb
+    case Ebb
+    case Bbb
+    case Fb         //Flats
+    case Cb
+    case Gb
+    case Db
+    case Ab
+    case Eb
+    case Bb
+    case F          //Naturals
+    case C
+    case G
+    case D          //Reflextion Point
+    case A
+    case E
+    case B
+    case Fs         //Sharps
+    case Cs
+    case Gs
+    case Ds
+    case As
+    case Es
+    case Bs
+    case Fx         //Double Sharp
+    case Cx
+    case Gx
+    case Dx
+    case Ax
+    case Ex
+    case Bx
 }
+//Note Names
 extension Note {
     public enum Name: Int {
-        case f
-        case c
-        case g
-        case d
-        case a
-        case e
-        case b
+        case F
+        case C
+        case G
+        case D
+        case A
+        case E
+        case B
     }
     public var name: Name {
         get {
@@ -65,28 +66,14 @@ extension Note {
         }
     }
 }
-extension Note.Name: CustomStringConvertible {
-    public var description: String {
-        get {
-            switch self {
-            case f: return "F"
-            case c: return "C"
-            case g: return "G"
-            case d: return "D"
-            case a: return "A"
-            case e: return "E"
-            case b: return "B"
-            }
-        }
-    }
-}
+//Accidentals
 extension Note {
     public enum Accidental: Int {
-        case doubleFlat
-        case flat
-        case natural
-        case sharp
-        case doubleSharp
+        case bb     //Double Flat
+        case b      //Flat
+        case n      //Natural
+        case s      //Sharp
+        case x      //Double Sharp
     }
     
     public var accidental: Accidental {
@@ -95,20 +82,8 @@ extension Note {
         }
     }
 }
-extension Note.Accidental: CustomStringConvertible {
-    public var description: String {
-        get {
-            switch self {
-            case doubleFlat: return "𝄫"
-            case flat: return "♭"
-            case natural: return "♮"
-            case sharp: return "♯"
-            case doubleSharp: return "𝄪"
-            }
-        }
-    }
-}
 
+//Initializers
 extension Note {
     public init(_ name: Name, _ accidental: Accidental){
         self = Note(rawValue: name.rawValue + accidental.rawValue*7)!
@@ -130,7 +105,7 @@ extension Note {
     public init(_ pitch: Pitch) {
         
         let value = pitch.value * 7 % 12 + 3
-        let min = Note.bFlat
+        let min = Note.Bb
         
         if value < min.rawValue {
             self = Note(rawValue: value + 12)!
@@ -141,6 +116,8 @@ extension Note {
         }
     }
 }
+
+//Methods
 extension Note {
     public func transposed(up interval: Interval) -> Note? {
         if let note = Note(rawValue: self.rawValue + interval.rawValue){
@@ -158,18 +135,7 @@ extension Note {
     }
 }
 
-extension Note: CustomStringConvertible {
-    public var description: String {
-        get {
-            if self.accidental == .natural {
-                return self.name.description
-            } else {
-                return self.name.description + self.accidental.description
-            }
-        }
-    }
-}
-
+//Arrays
 extension Array where Element: NoteProtocol {
     public func transposed(up interval: Interval)->[Note]?{
         var transposed: [Note] = []
@@ -188,6 +154,53 @@ extension Array where Element: NoteProtocol {
             } else { return nil }
         }
         return transposed
+    }
+    public var description: String {
+        get {
+            return ""
+        }
+    }
+}
+
+
+//Custom Strings
+extension Note.Name: CustomStringConvertible {
+    public var description: String {
+        get {
+            switch self {
+            case F      : return "F"
+            case C      : return "C"
+            case G      : return "G"
+            case D      : return "D"
+            case A      : return "A"
+            case E      : return "E"
+            case B      : return "B"
+            }
+        }
+    }
+}
+extension Note.Accidental: CustomStringConvertible {
+    public var description: String {
+        get {
+            switch self {
+            case bb     : return "𝄫"
+            case b      : return "♭"
+            case n      : return "♮"
+            case s      : return "♯"
+            case x      : return "𝄪"
+            }
+        }
+    }
+}
+extension Note: CustomStringConvertible {
+    public var description: String {
+        get {
+            if self.accidental == .n {
+                return self.name.description
+            } else {
+                return self.name.description + self.accidental.description
+            }
+        }
     }
 }
 
