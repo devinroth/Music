@@ -261,19 +261,19 @@ extension Array where Element: IntervalProtocol {
 extension Interval.Quality: CustomStringConvertible {
     public var description: String {
         switch self {
-        case vDim       : return "Quintuply Diminished"
-        case ivDim      : return "Quadruply Diminished"
-        case iiiDim     : return "Triply Diminished"
-        case iiDim      : return "Doubly Diminished"
-        case dim        : return "Diminished"
-        case min        : return "Minor"
-        case per        : return "Perfect"
-        case maj        : return "Major"
-        case aug        : return "Augmented"
-        case iiAug      : return "Doubly Augmented"
-        case iiiAug     : return "Triply Augmented"
-        case ivAug      : return "Quadruply Augmented"
-        case vAug       : return "Quintuply Augmented"
+        case .vDim       : return "Quintuply Diminished"
+        case .ivDim      : return "Quadruply Diminished"
+        case .iiiDim     : return "Triply Diminished"
+        case .iiDim      : return "Doubly Diminished"
+        case .dim        : return "Diminished"
+        case .min        : return "Minor"
+        case .per        : return "Perfect"
+        case .maj        : return "Major"
+        case .aug        : return "Augmented"
+        case .iiAug      : return "Doubly Augmented"
+        case .iiiAug     : return "Triply Augmented"
+        case .ivAug      : return "Quadruply Augmented"
+        case .vAug       : return "Quintuply Augmented"
         }
     }
 }

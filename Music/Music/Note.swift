@@ -168,13 +168,13 @@ extension Note.Name: CustomStringConvertible {
     public var description: String {
         get {
             switch self {
-            case F      : return "F"
-            case C      : return "C"
-            case G      : return "G"
-            case D      : return "D"
-            case A      : return "A"
-            case E      : return "E"
-            case B      : return "B"
+            case .F      : return "F"
+            case .C      : return "C"
+            case .G      : return "G"
+            case .D      : return "D"
+            case .A      : return "A"
+            case .E      : return "E"
+            case .B      : return "B"
             }
         }
     }
@@ -183,11 +183,11 @@ extension Note.Accidental: CustomStringConvertible {
     public var description: String {
         get {
             switch self {
-            case bb     : return "𝄫"
-            case b      : return "♭"
-            case n      : return "♮"
-            case s      : return "♯"
-            case x      : return "𝄪"
+            case .bb     : return "𝄫"
+            case .b      : return "♭"
+            case .n      : return "♮"
+            case .s      : return "♯"
+            case .x      : return "𝄪"
             }
         }
     }

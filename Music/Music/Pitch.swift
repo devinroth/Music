@@ -67,7 +67,7 @@ extension Array where Element: PitchProtocol {
     }
 }
 
-extension Pitch: IntegerLiteralConvertible {
+extension Pitch: ExpressibleByIntegerLiteral {
     public typealias Pitch = Int
     
     /// Create an instance initialized to `value`.
